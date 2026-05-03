@@ -1,0 +1,217 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: IQ Test Platform API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: tests
+    description: IQ test operations
+  - name: results
+    description: Test results
+  - name: leaderboard
+    description: Leaderboard operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /results:
+    post:
+      operationId: submitTestResult
+      tags: [results]
+      summary: Submit a completed IQ test result
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateResultBody"
+      responses:
+        "201":
+          description: Result created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestResult"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /results/{id}:
+    get:
+      operationId: getResultById
+      tags: [results]
+      summary: Get a test result by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Test result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestResult"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /leaderboard:
+    get:
+      operationId: getLeaderboard
+      tags: [leaderboard]
+      summary: Get top 10 scores of the day
+      responses:
+        "200":
+          description: Leaderboard entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LeaderboardEntry"
+
+  /stats:
+    get:
+      operationId: getStats
+      tags: [results]
+      summary: Get overall test statistics
+      responses:
+        "200":
+          description: Statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestStats"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    CreateResultBody:
+      type: object
+      properties:
+        userName:
+          type: string
+          description: Display name or location
+        score:
+          type: integer
+          description: IQ score (typically 70-145)
+        timeTaken:
+          type: integer
+          description: Time in seconds
+        correctAnswers:
+          type: integer
+        totalQuestions:
+          type: integer
+      required:
+        - score
+        - timeTaken
+        - correctAnswers
+        - totalQuestions
+
+    TestResult:
+      type: object
+      properties:
+        id:
+          type: integer
+        userName:
+          type: string
+          nullable: true
+        score:
+          type: integer
+        timeTaken:
+          type: integer
+        correctAnswers:
+          type: integer
+        totalQuestions:
+          type: integer
+        percentile:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - score
+        - timeTaken
+        - correctAnswers
+        - totalQuestions
+        - percentile
+        - createdAt
+
+    LeaderboardEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+        userName:
+          type: string
+          nullable: true
+        score:
+          type: integer
+        timeTaken:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - score
+        - timeTaken
+        - createdAt
+
+    TestStats:
+      type: object
+      properties:
+        totalTests:
+          type: integer
+        averageScore:
+          type: integer
+        highestScore:
+          type: integer
+        testsToday:
+          type: integer
+      required:
+        - totalTests
+        - averageScore
+        - highestScore
+        - testsToday
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
