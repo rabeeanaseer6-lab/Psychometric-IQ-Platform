@@ -1,13 +1,13 @@
-# 🧠 FreeIQTest.online — Psychometric IQ Platform
+# 🧠 FreeIQTest — Psychometric Intelligence Platform
 
-[![Website Live](https://img.shields.io/website?url=https%3A%2F%2Ffreeiqtest.online&label=Live%20Platform&style=for-the-badge)](https://freeiqtest.online)
+[![Website Live](https://img.shields.io/website?url=https%3A%2F%2Ffreeiqtestonline.online&label=Live%20Platform&style=for-the-badge)](https://freeiqtestonline.online)
 [![React](https://img.shields.io/badge/React_19-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](#tech-stack)
 [![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](#tech-stack)
 [![Express.js](https://img.shields.io/badge/Express_5-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)](#tech-stack)
 [![MySQL](https://img.shields.io/badge/MySQL-%234479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)](#database)
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg?style=for-the-badge)](#license)
 
-> A professional, high-authority IQ testing platform built for deployment at **[freeiqtest.online](https://freeiqtest.online)**. Delivers a scientifically styled 30-question cognitive assessment with IRT-based scoring, instant percentile results, a live leaderboard, long-form blog, knowledge wiki, and a full authority-content infrastructure.
+> A professional, high-authority IQ testing platform deployed at **[freeiqtestonline.online](https://freeiqtestonline.online)**. This platform delivers a scientifically calibrated 30-question cognitive assessment using IRT-based scoring, instant percentile analysis, a live global leaderboard, and a comprehensive educational ecosystem built to drive high organic search traffic.
 
 ---
 
@@ -18,49 +18,40 @@
 - [Project Structure](#-project-structure)
 - [Pages & Routes](#-pages--routes)
 - [Getting Started](#-getting-started)
+- [Database Architecture](#-database-architecture)
 - [Environment Variables](#-environment-variables)
-- [Database](#-database)
-- [Deploying to Hostinger](#-deploying-to-hostinger)
 - [Author & Licensing](#-author)
 
 ---
 
 ## 🔬 Overview
 
-**FreeIQTest.online** is a full-stack monorepo web platform designed to be a trusted, high-traffic IQ assessment destination. It combines psychometrically rigorous test scoring with a deep content ecosystem (blog, wiki, methodology pages) to build domain authority and organic search presence.
+**FreeIQTest** is a full-stack monorepo web application engineered to be a trusted destination for psychometric assessment. It shifts away from basic "quiz" logic to utilize real mathematical models for intelligence scoring while building massive domain authority through a deep, structured content library.
 
-**Key Design Goals:**
-* **Scientific Credibility:** IRT-based (Item Response Theory) scoring normalized to mean=100, SD=15 (WAIS standard).
-* **SEO Authority:** Structured data (JSON-LD), comprehensive meta tags, canonical URLs, and Open Graph / Twitter Cards.
-* **Performance:** Lightning-fast React + Vite SPA frontend, Express API, and MySQL backend.
-* **Analytics:** Native Google Analytics 4 (`G-RVCG58P63Z`) integrated via `gtag.js`.
+**Platform Highlights:**
+* **Scientific Rigor:** Item Response Theory (IRT) scoring normalized to a true intelligence bell curve (mean=100, SD=15).
+* **Technical SEO Mastery:** Implements strict structured data (JSON-LD), canonical routing, and dynamic meta-tagging for maximum search visibility.
+* **Modern Performance:** Lightning-fast React + Vite Single Page Application (SPA) driven by an Express/MySQL backend.
 
 ---
 
 ## ✨ Features
 
-### 🧠 Assessment Engine
-* **30-Question Adaptive Test:** Covers matrix reasoning, quantitative reasoning, and spatial visualization.
-* **IRT-Based Algorithm:** Scores are not based on a raw count; the algorithm rewards correctly answering higher-difficulty questions.
-* **Time Bonus:** Dynamic scoring adjustments applied for faster completion times.
-* **Normalized Distribution:** Scores map strictly to the IQ scale (70–145 range) with percentiles calculated from a normal distribution.
+### 🧠 The Assessment Engine
+* **30-Question Adaptive Matrix:** Tests logical reasoning, quantitative analysis, and spatial visualization.
+* **Weighted Scoring (IRT):** Dynamically rewards users for correctly solving high-difficulty nodes.
+* **Time Penalties/Bonuses:** Precision scoring based on completion speed.
+* **WAIS-Standard Normalization:** Outputs accurate percentiles mapped directly to the 70–145 IQ scale.
 
-### 📊 Results & Leaderboard
-* **Instant Results Page:** Displays IQ score, percentile rank, and a bell curve visualization (via Recharts).
-* **Score Breakdown:** Detailed analysis by cognitive domain.
-* **Live Leaderboard:** Real-time top 10 daily scores.
-* **Platform-Wide Stats:** Tracks total tests taken, average score, highest score, and daily volume.
+### 📊 Real-Time Analytics & Leaderboard
+* **Instant Breakdown:** Users receive their exact score, global percentile, and a rendered bell curve (powered by Recharts).
+* **Live Global Leaderboard:** Ranks the top 10 daily scores in real-time.
+* **Platform Telemetry:** Publicly tracks total assessments taken, platform average score, and daily volume.
 
-### 📚 Content Ecosystem
-* **Blog:** 13 long-form articles with featured Unsplash images, author bios, related posts, and tag filtering.
-* **Wiki:** 17 in-depth knowledge base entries across 5 categories (Intelligence Theory, Psychometrics, Neuroscience, Cognitive Factors, Test Design) featuring full-text search.
-* **Methodology & Science:** Deep-dives into IRT, g-factor assessment, scoring pipelines, neuroscience, and psychology.
-
-### 🔍 SEO & Identity
-* **Full `<head>` Meta Suite:** Description, keywords, author, robots, theme-color, and canonical links.
-* **Rich Previews:** Open Graph tags and Twitter Cards for social sharing.
-* **Structured Data:** JSON-LD integration for `WebSite`, `Organization`, and `Quiz` schemas.
-* **Dynamic Document Titles:** Handled efficiently via a custom `usePageTitle` hook.
+### 📚 SEO Content Ecosystem
+* **Knowledge Wiki:** 17 in-depth academic entries across Neuroscience, Psychometrics, and Intelligence Theory, complete with full-text search.
+* **Long-Form Blog:** 13 deeply researched articles featuring dynamic routing, tag filtering, and related-post algorithms.
+* **Methodology Hub:** Transparent documentation detailing the platform's psychometric pipeline.
 
 ---
 
@@ -68,17 +59,16 @@
 
 | Layer | Technology |
 | :--- | :--- |
-| **Frontend** | React 19, Vite 7, TypeScript |
+| **Frontend Framework** | React 19, Vite 7, TypeScript |
 | **Routing** | Wouter |
-| **UI & Styling** | shadcn/ui, Tailwind CSS v4, Framer Motion, Lucide React |
-| **Charts** | Recharts |
-| **Data Fetching** | TanStack Query v5 |
-| **API Backend** | Express 5, TypeScript |
-| **ORM & DB** | Drizzle ORM, MySQL (mysql2 driver) |
-| **Validation** | Zod |
-| **Code Generation**| Orval (OpenAPI → React Query hooks) |
-| **Tooling** | pnpm (workspace monorepo), esbuild (API), Vite (frontend) |
-| **Logging** | Pino + pino-http |
+| **UI Architecture** | shadcn/ui, Tailwind CSS v4, Framer Motion, Lucide React |
+| **Data Visualization** | Recharts |
+| **State & Fetching** | TanStack Query v5 |
+| **Backend API** | Express 5, Node.js |
+| **Database & ORM** | MySQL (mysql2), Drizzle ORM |
+| **Schema Validation** | Zod |
+| **API Code Generation**| Orval (OpenAPI → React Query hooks) |
+| **Package Management** | pnpm (Workspace Monorepo) |
 
 ---
 
@@ -87,52 +77,129 @@
 ```text
 /
 ├── artifacts/
-│   ├── iq-test/              # React + Vite frontend (main site)
-│   │   ├── index.html        # SEO meta, JSON-LD, Google Analytics
-│   │   ├── public/
-│   │   │   └── favicon.svg   # Branded brain icon
+│   ├── iq-test/              # Frontend Web Application
+│   │   ├── index.html        # SEO, JSON-LD, GA4 Initialization
+│   │   ├── public/           # Static assets & SVG Favicon suite
 │   │   └── src/
-│   │       ├── pages/        # All page components (17 routes)
-│   │       ├── components/   # Layout, Header, Footer, UI primitives
-│   │       ├── data/         # Questions, articles (blog), wiki terms
-│   │       └── hooks/        # usePageTitle, use-toast, etc.
+│   │       ├── pages/        # All 17 route components
+│   │       ├── components/   # UI Primitives, Layouts, Charts
+│   │       ├── data/         # Assessment JSON, Wiki/Blog data
+│   │       └── hooks/        # Custom SEO and utility hooks
 │   │
-│   └── api-server/           # Express REST API
+│   └── api-server/           # Backend Express API
 │       └── src/
-│           ├── routes/       # /results, /leaderboard, /stats, /health
-│           └── lib/          # Logger
+│           ├── routes/       # Handlers: /results, /leaderboard, /stats
+│           └── lib/          # Pino Logger & Middleware
 │
 └── lib/
-    ├── db/                   # @workspace/db — Drizzle schema + MySQL connection
-    │   ├── src/schema/       # testResultsTable definition
-    │   ├── src/index.ts      # mysql2 driver + drizzle instance
-    │   └── drizzle.config.ts # dialect: "mysql"
-    ├── api-spec/             # OpenAPI spec (source of truth)
-    ├── api-zod/              # Zod schemas auto-generated from spec
-    └── api-client-react/     # TanStack Query hooks auto-generated by Orval
-🗺 Pages & RoutesPathPage Description/Home — Hero, stats ticker, how-it-works, IQ distribution, EQ comparison, CTA./testTest — 30-question IQ test with active timer./results/:idResults — Score, percentile, bell curve, sharing options./blogBlog — Article listing with tag filter and search./blog/:slugArticle — Individual long-form blog post./wikiKnowledge Base — 17 entries, category filtering, search./methodologyMethodology — IRT methodology deep-dive./scienceScience — Science of intelligence (g-factor, Flynn Effect, etc.)./updatesUpdates — Platform changelog./aboutAbout — Mission, methodology summary, author bio./authorAuthor — Dedicated Rabeea Naseer profile page./contactContact — User inquiry form./careersCareers — Open roles and company values./privacy, /terms, /disclaimer, /cookiesLegal — Standard platform compliance policies.🚀 Getting StartedPrerequisitesNode.js 20+pnpm 9+A MySQL database (local or hosted)InstallationBash# Clone the repo
+    ├── db/                   # Drizzle Schema & MySQL Connection pooling
+    ├── api-spec/             # Single Source of Truth: OpenAPI Spec
+    ├── api-zod/              # Auto-generated Zod validation layers
+    └── api-client-react/     # Auto-generated TanStack Query hooks
+```
+
+---
+
+## 🗺 Pages & Routes
+
+| Path | Description |
+| :--- | :--- |
+| `/` | **Home** — Value proposition, statistics ticker, IQ distribution visuals. |
+| `/test` | **Assessment Engine** — The core 30-question interactive test. |
+| `/results/:id` | **Results** — Personalized score report and percentile chart. |
+| `/blog` | **Blog Index** — Dynamic article listing with category filters. |
+| `/blog/:slug` | **Article** — Immersive, long-form reading experience. |
+| `/wiki` | **Wiki** — Encyclopedia of intelligence with search capabilities. |
+| `/methodology` | **Methodology** — Documentation of scoring algorithms. |
+| `/science` | **Science** — Deep dives into the g-factor and the Flynn Effect. |
+| `/about` | **About** — Mission statement and creator bio. |
+| `/author` | **Author** — Dedicated profile for Rabeea Naseer. |
+| `/updates` , `/contact` | **Platform** — Changelogs and user inquiry routing. |
+| `/privacy`, `/terms`... | **Compliance** — Standard legal and cookie policies. |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* Node.js 20+
+* pnpm 9+
+* A running MySQL instance
+
+### Local Installation
+```bash
+# Clone the repository
 git clone [https://github.com/rabeeanaseer6-lab/Psychometric-IQ-Platform.git](https://github.com/rabeeanaseer6-lab/Psychometric-IQ-Platform.git)
 cd Psychometric-IQ-Platform
 
-# Install all workspace dependencies
+# Install workspace dependencies
 pnpm install
-DevelopmentTwo services need to run simultaneously: the API server and the Vite dev server.Bash# Terminal 1: Start the API server (port 8080 by default)
+```
+
+### Running the Development Environment
+This is a monorepo, requiring both the API and Frontend to run concurrently.
+
+```bash
+# Terminal 1: Boot the API Server (Defaults to port 8080)
 pnpm --filter @workspace/api-server run dev
 
-# Terminal 2: Start the frontend
+# Terminal 2: Boot the Frontend application
 pnpm --filter @workspace/iq-test run dev
-The frontend will be available at http://localhost:<PORT>.🗄 DatabaseThe application utilizes a single highly-optimized table managed via Drizzle ORM (lib/db/src/schema/results.ts).SQLCREATE TABLE test_results (
+```
+
+---
+
+## 🗄 Database Architecture
+
+The backend operates on a highly optimized, single-table architecture designed for rapid writes and leaderboard reads, managed by **Drizzle ORM**.
+
+```sql
+CREATE TABLE test_results (
   id              SERIAL PRIMARY KEY,
   user_name       VARCHAR(255),
   score           INT NOT NULL,
-  time_taken      INT NOT NULL,        -- in seconds
+  time_taken      INT NOT NULL,        -- measured in seconds
   correct_answers INT NOT NULL,
   total_questions INT NOT NULL,
   percentile      INT NOT NULL,
   created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
-To sync your schema: After setting your DATABASE_URL in your .env, push the schema to your database (no migration files needed):Bashpnpm --filter @workspace/db run push
-🔐 Environment VariablesSet these in your deployment environment or a local .env file (never commit secrets).VariableRequiredDescriptionDATABASE_URLYesMySQL connection string.SESSION_SECRETYesSecret key for signing sessions.NODE_ENVYesSet to production for deployment.PORTNoAPI server port (default: 8080, auto-injected by most hosts).LOG_LEVELNoPino log level: info (default), warn, or error.Database URL Format (Example for Hostinger):mysql://u123456789_mydb:MySecurePassword@srv1234.hstgr.io:3306/u123456789_mydb☁️ Deploying to Hostinger1. Build the frontendBashpnpm --filter @workspace/iq-test run build
-Output goes to artifacts/iq-test/dist/. Upload or serve this via Hostinger's file manager for static files.2. Build the API serverBashpnpm --filter @workspace/api-server run build
-Output goes to artifacts/api-server/dist/index.mjs. Run via Node.3. Configure Hostinger EnvironmentAdd your environment variables under Advanced → PHP / Node.js configuration in your Hostinger hPanel. Ensure NODE_ENV is set to production.4. Push Database SchemaRun this command locally or via Hostinger's terminal once your database is created:BashDATABASE_URL="mysql://..." pnpm --filter @workspace/db run push
-5. Point Your DomainIn Hostinger DNS, point freeiqtest.online to your hosting IP. SSL is handled automatically by Hostinger's built-in Let's Encrypt integration.👨‍💻 AuthorRabeea Naseer Founder @ NovatraTech — AI & Data-Driven Systems Developer Building scalable SaaS products, automated web infrastructures, and data-intelligent digital ecosystems.Portfolio: rabeeanaseer.onlineCompany: novatratech.onlineLinkedIn: linkedin.com/in/rabeea-naseer-045b4a337GitHub: @rabeeanaseer6-labKaggle: kaggle.com/rabeeanaseer📄 LicenseThis project is proprietary software. All rights reserved — FreeIQTest.online © 2026.For licensing or enterprise deployment inquiries, contact: legal@freeiqtest.online
+```
+
+**Syncing your database locally:**
+```bash
+# Push the Drizzle schema directly to your MySQL instance
+pnpm --filter @workspace/db run push
+```
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env` file at the root of your workspace. Never commit this file.
+
+| Variable | Required | Description |
+| :--- | :---: | :--- |
+| `DATABASE_URL` | **Yes** | Standard MySQL connection string. |
+| `SESSION_SECRET` | **Yes** | Cryptographic key for session integrity. |
+| `NODE_ENV` | **Yes** | `development` or `production`. |
+| `PORT` | No | Target port for the API server (Default: 8080). |
+
+---
+
+## 👨‍💻 Author
+
+**Rabeea Naseer** *Founder @ NovatraTech — AI & Data-Driven Systems Developer* Architecting scalable SaaS products, automated web infrastructures, and data-intelligent digital ecosystems.
+
+* **Portfolio:** [rabeeanaseer.online](https://rabeeanaseer.online)
+* **Company:** [novatratech.online](https://novatratech.online)
+* **LinkedIn:** [linkedin.com/in/rabeea-naseer](https://linkedin.com/in/rabeea-naseer-045b4a337)
+* **GitHub:** [@rabeeanaseer6-lab](https://github.com/rabeeanaseer6-lab)
+* **Kaggle:** [kaggle.com/rabeeanaseer](https://kaggle.com/rabeeanaseer)
+
+---
+
+## 📄 License
+
+This project is proprietary software. All rights reserved — FreeIQTest.online © 2026.  
+For licensing, enterprise deployment, or codebase inquiries, contact: **legal@freeiqtestonline.online**
