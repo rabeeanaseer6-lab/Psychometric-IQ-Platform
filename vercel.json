@@ -1,6 +1,8 @@
 {
   "version": 2,
   "installCommand": "pnpm install",
+  "buildCommand": "pnpm --filter @workspace/iq-test run build",
+  "outputDirectory": "artifacts/iq-test/dist/public",
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/index" }
   ]
