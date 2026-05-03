@@ -20,19 +20,43 @@ const generateBellCurveData = () => {
 
 const bellCurveData = generateBellCurveData();
 
+type LocalResult = {
+  id: number;
+  userName: string | null;
+  score: number;
+  timeTaken: number;
+  correctAnswers: number;
+  totalQuestions: number;
+  percentile: number;
+  createdAt: string;
+};
+
 export default function Results() {
   usePageTitle('Your IQ Test Results & Percentile Score');
   const params = useParams();
-  const id = parseInt(params.id || '0');
-  
-  const { data: result, isLoading } = useGetResultById(id, {
-    query: {
-      enabled: !!id,
-      queryKey: getGetResultByIdQueryKey(id)
+  const isLocal = params.id === 'local';
+  const id = isLocal ? 0 : parseInt(params.id || '0');
+
+  const localResult: LocalResult | null = (() => {
+    if (!isLocal) return null;
+    try {
+      const raw = sessionStorage.getItem('iq_local_result');
+      return raw ? (JSON.parse(raw) as LocalResult) : null;
+    } catch {
+      return null;
     }
+  })();
+
+  const { data: apiResult, isLoading } = useGetResultById(id, {
+    query: {
+      enabled: !isLocal && !!id,
+      queryKey: getGetResultByIdQueryKey(id),
+    },
   });
 
-  if (isLoading) {
+  const result = isLocal ? localResult : apiResult;
+
+  if (!isLocal && isLoading) {
     return (
       <Layout>
         <div className="flex items-center justify-center min-h-[60vh]">
@@ -70,7 +94,7 @@ export default function Results() {
     <Layout>
       <div className="bg-slate-50 py-12 md:py-24">
         <div className="container mx-auto max-w-4xl px-4">
-          
+
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Your Cognitive Profile</h1>
             <p className="text-lg text-slate-600">Based on standard psychometric modeling</p>
@@ -132,7 +156,7 @@ export default function Results() {
 
             </CardContent>
           </Card>
-          
+
         </div>
       </div>
     </Layout>
