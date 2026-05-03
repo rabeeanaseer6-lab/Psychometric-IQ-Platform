@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { Layout } from '@/components/Layout';
 import { Card, CardContent } from '@/components/ui/card';
 import { useGetResultById, getGetResultByIdQueryKey } from '@workspace/api-client-react';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { useParams, Link } from 'wouter';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { BrainCircuit, Clock, Target, Share2, RefreshCcw } from 'lucide-react';
+import { BrainCircuit, Clock, Target, Share2, RefreshCcw, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const generateBellCurveData = () => {
@@ -33,6 +34,7 @@ type LocalResult = {
 
 export default function Results() {
   usePageTitle('Your IQ Test Results & Percentile Score');
+  const [copied, setCopied] = useState(false);
   const params = useParams();
   const isLocal = params.id === 'local';
   const id = isLocal ? 0 : parseInt(params.id || '0');
@@ -146,8 +148,31 @@ export default function Results() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="outline" className="h-12 px-8" onClick={() => navigator.clipboard.writeText(window.location.href)}>
-                  <Share2 className="mr-2 h-4 w-4" /> Share Result
+                <Button
+                  variant="outline"
+                  className="h-12 px-8"
+                  onClick={async () => {
+                    const shareUrl = window.location.href.includes('/results/local')
+                      ? window.location.origin + '/test'
+                      : window.location.href;
+                    const shareData = {
+                      title: `My IQ Score: ${result.score}`,
+                      text: `I scored ${result.score} on the Free IQ Test! I'm in the top ${100 - result.percentile}% of test takers. Try it yourself:`,
+                      url: shareUrl,
+                    };
+                    if (navigator.share && navigator.canShare?.(shareData)) {
+                      try { await navigator.share(shareData); } catch { /* user cancelled */ }
+                    } else {
+                      await navigator.clipboard.writeText(shareUrl);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2500);
+                    }
+                  }}
+                >
+                  {copied
+                    ? <><Check className="mr-2 h-4 w-4 text-green-500" /> Link Copied!</>
+                    : <><Share2 className="mr-2 h-4 w-4" /> Share Result</>
+                  }
                 </Button>
                 <Button asChild className="h-12 px-8">
                   <Link href="/test"><RefreshCcw className="mr-2 h-4 w-4" /> Retake Assessment</Link>
